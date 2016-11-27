@@ -33,7 +33,7 @@ def extract(filename):
 	
 	Y.append(float(sum(rssi)/i))
 	X.append(t[count])
-	print rssi
+#	print rssi
 	count = count + 1
 	f.close()
 
@@ -41,20 +41,24 @@ filenames = ['0degree','45degree','90degree','135degree','180degree','225degree'
 
 for a in filenames:
 	extract(a)
-analytic_signal = hilbert(Y)
+
+#analytic_signal = hilbert(Y)
 #plt.plot(X,analytic_signal)
-amplitude_envelope = np.abs(analytic_signal)
-print amplitude_envelope
+#amplitude_envelope = np.abs(analytic_signal)
+#print amplitude_envelope
 #plt.plot(X,amplitude_envelope)
 plt.plot(X,Y)
+plt.savefig("plot.png")
+#plt.show()
 maxrssi = max(Y)
+#print maxrssi
 apdir = 0
 for a,b in zip(X,Y):
     if(b == maxrssi):
         apdir = a
+print apdir
 conn = sqlite3.connect('results.db')
 c = conn.cursor()
 c.execute('INSERT INTO Results (Sector,Condition,Distance) VALUES (%d,"LOS","far")'%(apdir))
 conn.commit()
 conn.close()
-plt.show()
