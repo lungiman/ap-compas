@@ -62,7 +62,7 @@ sleep 5
 kill -9 $!
 
 echo "readings have been collected"
-cp "radio.py" $foldername
+#cp "radio.py" $foldername
 #cd $foldername
 
-python2 radio.py
+python2 radio.py $foldername

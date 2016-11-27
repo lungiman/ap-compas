@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import math
 import sqlite3
+import sys
 
 
 #import statistics
@@ -40,6 +41,8 @@ def extract(filename):
 filenames = ['0degree','45degree','90degree','135degree','180degree','225degree','270degree','315degree']
 
 for a in filenames:
+	if len(sys.argv) == 2:
+		a = str(sys.argv[1]) + "/" + a
 	extract(a)
 
 #analytic_signal = hilbert(Y)
@@ -57,8 +60,28 @@ for a,b in zip(X,Y):
     if(b == maxrssi):
         apdir = a
 print apdir
-conn = sqlite3.connect('results.db')
+dist = 'near'
+cond = 'LOS'
+'''
+p = input('do you want to save data in db?: ')
+
+if str(p) != 'y':
+	exit()
+
+p = input('select distance :1.Near 2.far ')
+if p == '2':
+	dist = "far"
+
+p = input('select condition :1.LOS 2.NLOS 3.Outdoors ')
+
+if p == '2':
+	cond = "NLOS"
+elif p == '3':
+	cond = "out"
+'''
+datab = "results.db"
+conn = sqlite3.connect(datab)
 c = conn.cursor()
-c.execute('INSERT INTO Results (Sector,Condition,Distance) VALUES (%d,"LOS","far")'%(apdir))
+c.execute('INSERT INTO Results VALUES (NULL, %d,"LOS","near")'%(apdir))
 conn.commit()
 conn.close()
