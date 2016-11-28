@@ -51,7 +51,10 @@ for a in filenames:
 #print amplitude_envelope
 #plt.plot(X,amplitude_envelope)
 plt.plot(X,Y)
-plt.savefig("plot.png")
+plotloc = "plot.png"
+if len(sys.argv) == 2:
+	plotloc  = str(sys.argv[1]) + "/" + plotloc
+plt.savefig(plotloc)
 #plt.show()
 maxrssi = max(Y)
 #print maxrssi
