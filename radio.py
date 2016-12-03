@@ -85,6 +85,6 @@ elif p == '3':
 datab = "results.db"
 conn = sqlite3.connect(datab)
 c = conn.cursor()
-c.execute('INSERT INTO Results VALUES (NULL, %d,"LOS","near")'%(apdir))
+c.execute('INSERT INTO Results VALUES (NULL, %d,"NONLOS","near","indoors")'%(apdir))
 conn.commit()
 conn.close()
