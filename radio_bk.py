@@ -50,12 +50,14 @@ for a in filenames:
 #amplitude_envelope = np.abs(analytic_signal)
 #print amplitude_envelope
 #plt.plot(X,amplitude_envelope)
-#plt.plot(X,Y)
+major_ticks = np.arange(0, 360, 40)
+plt.plot(X,Y)
+plt.xticks(np.linspace(0,360,9,endpoint=True))
 plotloc = "plot.png"
-#if len(sys.argv) == 2:
-#	plotloc  = str(sys.argv[1]) + "/" + plotloc
+if len(sys.argv) == 2:
+	plotloc  = str(sys.argv[1]) + "/" + plotloc
 #plt.savefig(plotloc)
-#plt.show()
+plt.show()
 maxrssi = max(Y)
 minrssi = min(Y)
 
